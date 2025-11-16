@@ -1,0 +1,73 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.swp
+*.tmp
+*.log
+
+# Unit test / coverage reports
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# -------------------------
+# Poetry
+# -------------------------
+# Virtualenvs created by Poetry (if not using in-project venvs)
+.venv/
+# Poetry build artifacts
+dist/
+build/
+
+# -------------------------
+# Docker
+# -------------------------
+# Ignore Docker build context artifacts
+*.tar
+*.pid
+*.seed
+*.bak
+*.old
+
+# Docker Compose override files (local dev only)
+docker-compose.override.yml
+
+# -------------------------
+# OS / Editor
+# -------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+
+# -------------------------
+# Misc
+# -------------------------
+.env
+.env.*
+*.sqlite3
