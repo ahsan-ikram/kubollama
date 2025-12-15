@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-app
+  template:
+    metadata:
+      labels:
+        app: ollama-app
+    spec:
+      containers:
+      - name: app
+        image: ollama-client-app:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: OLLAMA_URL
+          value: "http://ollama-service:11434"
+        command: ["tail", "-f", "/dev/null"]

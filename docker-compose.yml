@@ -1,37 +1,26 @@
-version: "3.9"
-
 services:
   ollama:
-    image: ollama/ollama:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    image: ollama-with-gemma3_1b:latest
     container_name: ollama
     ports:
       - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    command: serve
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    image: ollama-client-app:latest
     container_name: ollama-app
     depends_on:
-      - ollama
+      ollama:
+        condition: service_healthy
     environment:
       OLLAMA_URL: "http://ollama:11434"
-    entrypoint: >
-      sh -c '
-        echo "Waiting for Ollama API...";
-        until curl -sf http://ollama:11434/api/tags >/dev/null; do
-          sleep 1;
-        done;
-
-        echo "Ollama ready. Pulling model...";
-        curl -s -X POST http://ollama:11434/api/pull \
-          -H "Content-Type: application/json" \
-          -d "{\"name\": \"smollm:135m\"}";
-
-        echo "Model ready. Starting app...";
-        exec poetry run python -m ollama_client.main
-      '
-
-volumes:
-  ollama_data:

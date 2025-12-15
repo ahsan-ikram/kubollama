@@ -1,0 +1,12 @@
+# Multi-stage Dockerfile to preload the gemma3 model into Ollama
+
+# Stage 1: Run Ollama and pull the model
+FROM ollama/ollama AS builder
+RUN ollama serve & \
+    sleep 5 && \
+    ollama pull gemma3:1b
+
+# Stage 2: Final image with preloaded model
+FROM ollama/ollama
+COPY --from=builder /root/.ollama /root/.ollama
+CMD ["serve"]
