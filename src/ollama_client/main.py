@@ -2,16 +2,16 @@ from ollama_client.ollama import Ollama
 
 
 def main() -> None:
-    ollama = Ollama()
+    ollama: Ollama = Ollama()
 
     # REPL style prompting
     while True:
         print("Type '/bye' to exit.")
-        prompt = input("User prompt: ")
+        prompt: str = input("User prompt: ")
         if prompt == "/bye":
             print("Exiting the REPL. Good bye!")
             break
-        result = ollama.talk(prompt)
+        result: str = ollama.talk(prompt)
         print(f"User: {prompt}\nOllama:", result)
 
 
