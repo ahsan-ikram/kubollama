@@ -1,24 +1,11 @@
 [project]
-name = "ollama-client"
+name = "ollama-k8s"
 version = "0.1.0"
-description = "Custom Ollama Client"
-authors = [
-    {name = "Muhammad Ahsan", email = "muhammad.ahsan@gmail.com"}
-]
+description = "Simple chat interface to talk to Ollama deployed in kubernetes"
+authors = [{ name = "Muhammad Ahsan", email = "muhammad.ahsan@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "requests >=2.32.5,<3.0.0"
-]
+dependencies = ["requests >=2.32.5,<3.0.0"]
 
-[tool.poetry]
-packages = [
-    { include = "ollama_client", from = "src" }
-]
-
-[project.scripts]
-ollama-client = "ollama_client.main:main"
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = ["black>=25.12.0", "pytest>=9.0.2"]
