@@ -18,6 +18,9 @@ services:
       context: .
       dockerfile: Dockerfile.app
     image: ollama-client-app:latest
+    stdin_open: true # keeps STDIN open
+    tty: true
+    # To provide input use 'docker attach ollama-app' in a separate terminal
     container_name: ollama-app
     depends_on:
       ollama:
